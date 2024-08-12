@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<main>
+    <div class="container">
+        <section>
+            <h1>Welcome to the Web Blog</h1>
+            <p>Here you can see my blog posts.</p>
+
+            <form id="addBlogForm" method="post" action="/add-blog">
+                <h2>Add a New Blog</h2>
+                <label for="blogTitle">Blog Title:</label>
+                <input type="text" id="blogTitle" name="title" required>
+            
+                <label for="blogDescription">Description:</label>
+                <textarea id="blogDescription" name="description" required></textarea>
+            
+                <button type="submit">Add Blog</button>
+            </form>
+            
+            <h2>Blog Posts</h2>
+            <ul id="blogCards">
+                <% blogs.forEach((blog, index) => { %>
+                    <li class="blog-card">
+                        <h3><%= blog.title %></h3>
+                        <p><%= blog.description %></p>
+                        <form method="post" action="/delete-blog" style="display:inline;">
+                            <input type="hidden" name="index" value="<%= index %>">
+                            <button type="submit" class="delete-btn">Delete Blog</button>
+                        </form>
+                    </li>
+                <% }) %>
+            </ul>
+        </section>
+    </div>
+</main>
+
+<%- include('partials/footer') %>
